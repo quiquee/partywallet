@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="enUS" lang="enUS">
+<head>
+<title>Party Coin Wallet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="qrcode.min.js"></script>
+</head>
+<body>
+<div id="body" style="width:700px;">
+	<div style="width:100%; text-align:center;">
+		<h2>Party Coin Wallet Purchase</h2>
+	</div>
+        <div>
+           <a href=https://www.bitaddress.org/bitaddress.org-v3.2.2-SHA256-f4d047c264a2b71946de319482a9365e56d8d7289dd85a352da3b1448b7647df.html>Bitaddress.org</a><br>
+        </div>
+	<div style="width:50%; float:left; text-align:center;">
+		<input id="bitcoinaddress" type="text" placeholder="Bitcoin Address" style="width:90%; margin: 0 auto;" />
+	</div>
+	<div style="width:50%; float:right; text-align:center;">
+		<input id="privatekey" type="text" placeholder="Private Key" style="width:90%; margin: 0 auto;" />
+	</div>
+	<br />
+	<div id="wallet" style="width:700px; height:700px; margin-top:15px; overflow:hidden;">
+		<img id="walletimage" style="position:absolute; z-index:1;" src="wallet.jpg" />
+		<p id="addresstext" style="position:absolute; z-index:2; padding-left:150px; padding-top:18px; font-family:Courier; font-size:14px; color:#464644;">173Pw9aJUwhV77vtLwSDTzkWqbV7cfP6RE</p>
+		<div id="qrcode" style="position:absolute; z-index:3; width:99px; height:99px; padding-left:64px; padding-top:97px;" />
+		<div id="qrcode2" style="position:absolute; z-index:3; width:79px; height:79px; padding-left:513px; padding-top:111px;" />
+	</div>
+</div>
+<script type="text/javascript">
+
+var walletimage = document.getElementById("walletimage");
+
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	width : 99,
+	height : 99
+});
+
+var qrcode2 = new QRCode(document.getElementById("qrcode2"), {
+	width : 79,
+	height : 79
+});
+
+function swapImage(){
+	if(document.getElementById("checkbox").checked){
+		walletimage.src="wallet.jpg";
+	} else {
+		walletimage.src="wallet-front.jpg";
+	}
+}
+
+function drawCode () {
+	var bitcoinaddress = document.getElementById("bitcoinaddress").value;
+	qrcode.makeCode(bitcoinaddress);
+	document.getElementById("addresstext").innerHTML = bitcoinaddress;
+}
+
+function drawCode2 () {
+	var privatekey = document.getElementById("privatekey").value;
+	qrcode2.makeCode(privatekey);
+}
+
+function updateText () {
+	var bitcoinaddress = document.getElementById("bitcoinaddress").value;
+	
+}
+
+qrcode.makeCode("173Pw9aJUwhV77vtLwSDTzkWqbV7cfP6RE");
+qrcode2.makeCode("github.com/raptastics");
+
+$("#bitcoinaddress").
+	on("keyup", function (e) {
+		drawCode();
+	});
+
+$("#privatekey").
+	on("keyup", function (e) {
+		drawCode2()
+	});
+</script>
+</body>
